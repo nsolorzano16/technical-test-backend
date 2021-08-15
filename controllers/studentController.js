@@ -31,7 +31,7 @@ const addStudent = async (req, res = response) => {
 
 const getStudents = async (req, res = response) => {
   try {
-    const students = await Student.find();
+    const students = await Student.find().sort('-updatedAt');
 
     return res.status(200).json({
       ok: true,
