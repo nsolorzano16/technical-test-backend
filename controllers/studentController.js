@@ -49,7 +49,9 @@ const getStudents = async (req, res = response) => {
 const getStudent = async (req, res = response) => {
   try {
     const studentId = req.params.id;
-    const student = Student.findById(studentId);
+
+    const student = await Student.findById(studentId);
+
     if (!student) {
       return res.status(404).json({
         ok: false,
@@ -57,9 +59,7 @@ const getStudent = async (req, res = response) => {
       });
     }
 
-    return res.status(200).json({
-      ...student,
-    });
+    return res.status(200).json(student);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
