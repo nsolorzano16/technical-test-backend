@@ -8,6 +8,7 @@ const {
   editStudent,
   deleteStudent,
   getStudents,
+  getStudent,
 } = require('../controllers/studentController');
 const { isDate } = require('../helpers/isDate');
 
@@ -42,5 +43,7 @@ router.put(
 );
 
 router.delete('/delete/:id', deleteStudent);
+
+router.get('/detail/:id', getStudent);
 
 module.exports = router;

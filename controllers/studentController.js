@@ -46,6 +46,29 @@ const getStudents = async (req, res = response) => {
   }
 };
 
+const getStudent = async (req, res = response) => {
+  try {
+    const studentId = req.params.id;
+    const student = Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Student not exists',
+      });
+    }
+
+    return res.status(200).json({
+      ...student,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      ok: false,
+      msg: 'Internal server error, contact your administrator',
+    });
+  }
+};
+
 const editStudent = async (req, res = response) => {
   try {
     const studentId = req.params.id;
@@ -113,4 +136,5 @@ module.exports = {
   getStudents,
   editStudent,
   deleteStudent,
+  getStudent,
 };
